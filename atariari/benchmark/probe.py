@@ -241,7 +241,7 @@ class ProbeTrainer():
 
     def log_results(self, epoch_idx, *dictionaries):
         print("Epoch: {}".format(epoch_idx))
-        if wandb is not None:
+        if self.wandb is not None:
             self.log_wandb_results(epoch_idx, *dictionaries)
         for dictionary in dictionaries:
             for k, v in dictionary.items():
@@ -249,7 +249,6 @@ class ProbeTrainer():
             print("\t --")
             
     def log_wandb_results(self, epoch_idx, *dictionaries):
-        print("Epoch: {}".format(epoch_idx))
         for dictionary in dictionaries:
             wandb.log(dictionary, step=epoch_idx)
 
