@@ -251,9 +251,7 @@ class ProbeTrainer():
     def log_wandb_results(self, epoch_idx, *dictionaries):
         print("Epoch: {}".format(epoch_idx))
         for dictionary in dictionaries:
-            for k, v in dictionary.items():
-                wandb.log("\t {}: {:8.4f}".format(k, v))
-            wandb.log("\t --")    
+            wandb.log(dictionary)
 
 def postprocess_raw_metrics(acc_dict, f1_dict):
     acc_overall_avg, f1_overall_avg = compute_dict_average(acc_dict), \
