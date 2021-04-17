@@ -257,6 +257,8 @@ class ProbeTrainer():
             
     def log_wandb_results(self, epoch_idx, *dictionaries):
         for dictionary in dictionaries:
+            print("type", type(dictionary))
+            print("dictionary", dictionary)
             wandb.log(dictionary, step=epoch_idx)
 
 def postprocess_raw_metrics(acc_dict, f1_dict):
