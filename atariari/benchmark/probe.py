@@ -242,7 +242,7 @@ class ProbeTrainer():
 
     def log_results(self, epoch_idx, *dictionaries):
         print("Epoch: {}".format(epoch_idx))
-        if self.wandb is not None:
+        if self.wandb:
             self.log_wandb_results(epoch_idx, *dictionaries)
         for dictionary in dictionaries:
             for k, v in dictionary.items():
