@@ -1,4 +1,7 @@
-import cv2
+try:
+    import cv2
+except:
+    pass
 from baselines.common.vec_env import SubprocVecEnv, DummyVecEnv
 from gym import spaces
 
