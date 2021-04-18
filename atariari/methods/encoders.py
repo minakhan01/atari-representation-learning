@@ -164,29 +164,29 @@ class NatureCNN(nn.Module):
         return out
 
 class ClipEncoder(nn.Module):
-  def __init__(self, input_channels, feature_size):
-    super().__init__()
-    self.device = "cuda" if torch.cuda.is_available() else "cpu"
-    self.clip_model, _ = clip.load("ViT-B/32", device=self.device)
-    self.preprocess = Compose([
-        Resize((224, 224), interpolation=Image.BICUBIC),
-        Normalize(
-          (0.48145466, 0.4578275, 0.40821073),
-          (0.26862954, 0.26130258, 0.27577711)
-        )
-    ])
-    self.feature_size = feature_size
-    self.input_channels = input_channels
+    def __init__(self, input_channels, feature_size):
+        super().__init__()
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.clip_model, _ = clip.load("ViT-B/32", device=self.device)
+        self.preprocess = Compose([
+            Resize((224, 224), interpolation=Image.BICUBIC),
+            Normalize(
+              (0.48145466, 0.4578275, 0.40821073),
+              (0.26862954, 0.26130258, 0.27577711)
+            )
+        ])
+        self.feature_size = feature_size
+        self.input_channels = input_channels
 
-  def forward(self, inputs):
-      x = self.get_clip_features(inputs)
-      x = x.view(x.size(0), -1)
-      return x
-  
-  def get_clip_features(self, image):
-    with torch.no_grad():
-      image_features = self.clip_model.encode_image(self.preprocess(image)).float()
-    return image_features
+    def forward(self, inputs):
+        x = self.get_clip_features(inputs)
+        x = x.view(x.size(0), -1)
+        return x
+
+    def get_clip_features(self, image):
+        with torch.no_grad():
+          image_features = self.clip_model.encode_image(self.preprocess(image)).float()
+        return image_features
 
 class PPOEncoder(nn.Module):
     def __init__(self, env_name, checkpoint_index):
