@@ -188,8 +188,6 @@ class ClipEncoder(nn.Module):
       image_features = self.clip_model.encode_image(self.preprocess(image)).float()
     return image_features
 
-my_encoder = ClipEncoder(input_channels=3,feature_size=512)
-
 class PPOEncoder(nn.Module):
     def __init__(self, env_name, checkpoint_index):
         super().__init__()
