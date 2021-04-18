@@ -39,7 +39,7 @@ def run_probe(args):
     elif args.method == "majority":
         encoder = None
 
-    elif args.method == "clip"
+    elif args.method == "clip":
         encoder = ClipEncoder(input_channels=3, feature_size=512)
 
     else:
