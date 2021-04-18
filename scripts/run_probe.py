@@ -3,7 +3,7 @@ from atariari.benchmark.probe import ProbeTrainer
 
 import torch
 from atariari.methods.utils import get_argparser, train_encoder_methods, probe_only_methods
-from atariari.methods.encoders import NatureCNN, ImpalaCNN, PPOEncoder
+from atariari.methods.encoders import NatureCNN, ImpalaCNN, PPOEncoder, ClipEncoder
 import wandb
 import sys
 from atariari.methods.majority import majority_baseline
@@ -38,6 +38,9 @@ def run_probe(args):
 
     elif args.method == "majority":
         encoder = None
+
+    elif args.method == "clip"
+        encoder = ClipEncoder(input_channels=3, feature_size=512)
 
     else:
         observation_shape = tr_eps[0][0].shape

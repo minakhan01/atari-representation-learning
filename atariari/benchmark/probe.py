@@ -63,13 +63,6 @@ class ProbeTrainer():
 
         # bad convention, but these get set in "create_probes"
         self.probes = self.early_stoppers = self.optimizers = self.schedulers = None
-        
-        # 1. Start a W&B run
-#         wandb.init(project='atari-clip', entity='minakhan')
-
-#         # 2. Save model inputs and hyperparameters
-#         config = wandb.config
-#         config.game  = "Breakout-NonLinear"
 
     def create_probes(self, sample_label):
         if self.fully_supervised:
@@ -249,17 +242,10 @@ class ProbeTrainer():
 
     def log_results(self, epoch_idx, *dictionaries):
         print("Epoch: {}".format(epoch_idx))
-#         self.log_wandb_results(epoch_idx, dictionaries)
         for dictionary in dictionaries:
             for k, v in dictionary.items():
                 print("\t {}: {:8.4f}".format(k, v))
             print("\t --")
-            
-#     def log_wandb_results(self, epoch_idx, *dictionaries):
-#         for dictionary in dictionaries:
-#             print("type", type(dictionary))
-#             print("dictionary", dictionary)
-#             wandb.log(dictionary, step=epoch_idx)
 
 def postprocess_raw_metrics(acc_dict, f1_dict):
     acc_overall_avg, f1_overall_avg = compute_dict_average(acc_dict), \
